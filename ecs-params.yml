@@ -1,0 +1,27 @@
+version: 1
+task_definition:
+  task_execution_role: cib-cross-services-fargate-role
+  task_role_arn: cib-cross-services-fargate-role
+  ecs_network_mode: awsvpc
+  task_size:
+    mem_limit: 0.5GB
+    cpu_limit: 256
+  services:
+    tibco-ems:
+      mem_limit: "512M"
+  efs_volumes:
+    - name: "files"
+      filesystem_id: "fs-b5126c44"
+      # root_directory: /
+      transit_encryption: ENABLED
+      access_point: fsap-02b9b33c874375c30
+      iam: DISABLED
+run_params:
+  network_configuration:
+    awsvpc_configuration:
+      subnets:
+        - "subnet-00916712da12edfd6"
+        - "subnet-0f1806f6c881be2ea"
+      security_groups:
+        - "sg-0d7787872e53ce012"
+      assign_public_ip: ENABLED

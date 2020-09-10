@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  tibco-ems:
+    image: 204040696103.dkr.ecr.eu-west-2.amazonaws.com/ems:latest
+    ports:
+      - "7222:7222"
+    logging:
+      driver: awslogs
+      options: 
+        awslogs-group: /ecs/ems-task
+        awslogs-region: eu-west-2
+        awslogs-stream-prefix: tibco-ems
+    volumes: 
+      - files:/shared
+volumes:
+  files:
